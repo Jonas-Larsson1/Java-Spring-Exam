@@ -30,7 +30,7 @@ public class BookController {
   }
 
   @GetMapping
-  public List<Book> readBook() {
+  public List<Book> readAllBooks() {
     return bookService.getBook();
   }
 
@@ -39,7 +39,7 @@ public class BookController {
     return bookService.getBook(id);
   }
 
-  @GetMapping
+//  @GetMapping
 //  metod för att ta emot olika parametrar, t.ex. titel, författare, osv, använd parameters
 
   @PutMapping("/{id}")
@@ -47,9 +47,9 @@ public class BookController {
     return bookService.modifyBook(id, book);
   }
 
-  @DeleteMapping
-  public Book deleteBook() {
-
-  }
+//  @DeleteMapping
+//  public Book deleteBook() {
+//
+//  }
 
 }
