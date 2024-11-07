@@ -2,12 +2,7 @@ package com.Group3.JavaSpringExam.Author;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -28,7 +23,7 @@ public class Author {
 
   private Date birthDate;
 
-  @OneToMany(mappedBy = "author")
+  @OneToMany(mappedBy = "author", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   @JsonIgnore
   private List<Book> books;
 }

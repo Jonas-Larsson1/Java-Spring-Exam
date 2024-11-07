@@ -3,16 +3,7 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 import com.Group3.JavaSpringExam.Loan.Loan;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +27,7 @@ public class Book {
   @JoinColumn(name = "author_id")
   private Author author;
 
-  @ManyToMany
+  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   @JoinTable(
       name = "books_genres",
       joinColumns = @JoinColumn(name = "book_id"),
