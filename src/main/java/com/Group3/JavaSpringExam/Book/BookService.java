@@ -19,6 +19,9 @@ public class BookService {
   }
 
   public Book addBook(Book book) {
+    // a new book should always start off available (until a loan is created -
+    // otherwise no-one will ever be able to borrow it)
+    book.setAvailable(true);
     return bookRepository.save(book);
   }
 
@@ -36,6 +39,5 @@ public class BookService {
     modelMapper.map(updateBookData, existingBook);
     return bookRepository.save(existingBook);
   }
-
 
 }
