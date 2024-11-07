@@ -31,8 +31,8 @@ public class BookController {
   }
 
   @PostMapping("/author")
-  public Book createBookWithAuthor(@RequestBody BookWithAuthorDTO bookWithAuthorDTO) {
-    return bookService.addBookWithAuthor(bookWithAuthorDTO.returnCompleteBook());
+  public Book createBookWithAuthor(@RequestBody BookDTO bookDTO) {
+    return bookService.addCompleteBook(bookDTO.returnCompleteBook());
   }
 
   @GetMapping
