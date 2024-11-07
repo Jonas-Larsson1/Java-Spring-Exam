@@ -19,6 +19,7 @@ public class BookController {
 
   private final BookService bookService;
 
+
   @Autowired
   public BookController(BookService bookService) {
     this.bookService = bookService;
@@ -27,6 +28,11 @@ public class BookController {
   @PostMapping
   public Book createBook(@RequestBody Book book) {
     return bookService.addBook(book);
+  }
+
+  @PostMapping("/author")
+  public Book createBookWithAuthor(@RequestBody BookWithAuthorDTO bookWithAuthorDTO) {
+    return bookService.addBookWithAuthor(bookWithAuthorDTO.returnCompleteBook());
   }
 
   @GetMapping
