@@ -3,7 +3,6 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Author.AuthorRepository;
 import com.Group3.JavaSpringExam.Author.AuthorService;
-import com.Group3.JavaSpringExam.Genre.Genre;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
