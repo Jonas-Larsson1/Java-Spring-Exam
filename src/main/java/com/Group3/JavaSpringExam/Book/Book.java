@@ -11,9 +11,13 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -26,13 +30,15 @@ public class Book {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Size(min = 2, max = 50, message = "Please enter a valid title.")
   private String title;
 
-  private int publicationYear;
+  @PastOrPresent(message = "Year of publication must be this year or earlier!")
+  private Year publicationYear;
 
   @ManyToOne
   @JoinColumn(name = "author_id")
-  private Author author;
+  private @Valid Author author;
 
   @ManyToMany
   @JoinTable(
@@ -40,7 +46,7 @@ public class Book {
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "genre_id")
   )
-  private List<Genre> genres;
+  private List<@Valid Genre> genres;
 
   private boolean available;
 }
