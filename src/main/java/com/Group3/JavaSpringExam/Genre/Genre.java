@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,8 @@ public class Genre {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Size(min = 2, max = 50, message = "Please enter a name for this genre.")
+  @Pattern(regexp = "^[a-zA-Z]*$", message = "Genre names may only contain letters.")
   private String name;
 
   @ManyToMany(mappedBy = "genres", cascade = {CascadeType.MERGE, CascadeType.PERSIST})

@@ -1,6 +1,7 @@
 package com.Group3.JavaSpringExam.Book;
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +27,13 @@ public class BookController {
   }
 
   @PostMapping
-  public Book createBook(@RequestBody Book book) {
+  public Book createBook(@RequestBody @Valid Book book) {
     return bookService.addBook(book);
   }
 
   @PostMapping("/author")
-  public Book createBookWithAuthor(@RequestBody BookWithAuthorDTO bookWithAuthorDTO) {
-    return bookService.addBookWithAuthor(bookWithAuthorDTO.returnCompleteBook());
+  public Book createBookWithAuthor(@RequestBody BookDTO bookDTO) {
+    return bookService.addCompleteBook(bookDTO.returnCompleteBook());
   }
 
   @GetMapping
@@ -49,7 +50,7 @@ public class BookController {
 //  metod för att ta emot olika parametrar, t.ex. titel, författare, osv, använd parameters
 
   @PutMapping("/{id}")
-  public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
+  public Book updateBook(@PathVariable Long id, @RequestBody @Valid Book book) {
     return bookService.modifyBook(id, book);
   }
 

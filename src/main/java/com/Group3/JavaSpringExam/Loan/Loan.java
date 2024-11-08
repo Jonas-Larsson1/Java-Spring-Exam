@@ -10,9 +10,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "loans")
@@ -23,11 +24,14 @@ public class Loan {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Date loanDate;
+  @PastOrPresent(message = "Invalid date!")
+  private LocalDate loanDate;
 
-  private Date dueDate;
+  @Future(message = "Due date must be in the future!")
+  private LocalDate dueDate;
 
-  private Date returnedDate;
+  @PastOrPresent(message = "Invalid date!")
+  private LocalDate returnedDate;
 
   @ManyToOne
   @JoinColumn(name = "member_id")
