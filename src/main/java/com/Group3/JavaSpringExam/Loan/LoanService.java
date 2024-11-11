@@ -15,9 +15,8 @@ public class LoanService {
     this.loanRepository = loanRepository;
   }
 
-  public ResponseEntity<Loan> addLoan(Loan loan) {
-    Loan newLoan = loanRepository.save(loan);
-    return new ResponseEntity<>(newLoan, HttpStatus.CREATED);
+  public Loan addLoan(Loan loan) {
+    return loanRepository.save(loan);
   }
 
 }
