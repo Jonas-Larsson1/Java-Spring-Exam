@@ -1,4 +1,4 @@
-package com.Group3.JavaSpringExam.Config;
+package com.Group3.JavaSpringExam.Util.Config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

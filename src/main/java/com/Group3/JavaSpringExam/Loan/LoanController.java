@@ -36,4 +36,9 @@ public class LoanController {
     return new ResponseEntity<>(loanService.getAllActiveLoans(), HttpStatus.OK);
   }
 
+  @PutMapping("/endloan/{loanId}")
+  public ResponseEntity<Loan> endLoan(@PathVariable Long loanId) {
+    return new ResponseEntity<>(loanService.endLoan(loanId), HttpStatus.OK);
+  }
+
 }

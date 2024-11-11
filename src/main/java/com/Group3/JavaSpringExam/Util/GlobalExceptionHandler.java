@@ -1,4 +1,4 @@
-package com.Group3.JavaSpringExam;
+package com.Group3.JavaSpringExam.Util;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

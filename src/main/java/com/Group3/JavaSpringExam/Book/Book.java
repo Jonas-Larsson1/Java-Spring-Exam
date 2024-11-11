@@ -43,7 +43,9 @@ public class Book {
   @JoinColumn(name = "author_id")
   private @Valid Author author;
 
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+  // removed CascadeType.PERSIST as this caused errors
+  // when posting new books with existing genres
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(
       name = "books_genres",
       joinColumns = @JoinColumn(name = "book_id"),
