@@ -21,6 +21,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException exception) {
-        return ResponseEntity.badRequest().body("Sorry, we couldn't find that book!");
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }
