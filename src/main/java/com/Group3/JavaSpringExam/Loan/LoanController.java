@@ -1,5 +1,6 @@
 package com.Group3.JavaSpringExam.Loan;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class LoanController {
   }
 
   @PostMapping
-  public ResponseEntity<Loan> createLoan(@RequestBody Loan loan) {
+  public ResponseEntity<Loan> createLoan(@RequestBody @Valid Loan loan) {
     Loan createdLoan = loanService.addLoan(loan);
     return new ResponseEntity<>(createdLoan, HttpStatus.CREATED);
   }
