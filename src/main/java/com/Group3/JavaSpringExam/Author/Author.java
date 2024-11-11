@@ -2,8 +2,11 @@ package com.Group3.JavaSpringExam.Author;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -12,6 +15,9 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,7 +41,7 @@ public class Author {
   @Past(message = "Date of birth must be in the past!")
   private LocalDate birthDate;
 
-  @OneToMany(mappedBy = "author")
+  @OneToMany(mappedBy = "author", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   @JsonIgnore
   private List<Book> books;
 }

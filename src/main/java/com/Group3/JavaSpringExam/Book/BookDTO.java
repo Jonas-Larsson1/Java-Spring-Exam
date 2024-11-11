@@ -3,8 +3,10 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import lombok.Data;
 
+
+
 @Data
-public class BookWithAuthorDTO {
+public class BookDTO {
 
     private Book book;
     private Author author;
