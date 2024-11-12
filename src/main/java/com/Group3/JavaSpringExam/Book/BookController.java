@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Year;
 import java.util.List;
 
 @RestController
@@ -106,6 +107,17 @@ public class BookController {
   @GetMapping("/countByAvailability")
   public long countBooksByAvailability(@RequestParam boolean available) {
     return bookRepository.countByAvailable(available);
+  }
+
+  @GetMapping("/advancedsearch")
+  public List<Book> advancedSearch(
+          @RequestParam(required = false) String title,
+          @RequestParam(required = false) String authorFirstName,
+          @RequestParam(required = false) String authorLastName,
+          @RequestParam(required = false) String genreName,
+          @RequestParam(required = false) Year publicationYear) {
+
+    return bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
   }
 
 //  @DeleteMapping

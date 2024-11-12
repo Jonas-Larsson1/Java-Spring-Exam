@@ -87,7 +87,7 @@ public class BookService {
     }
     // Kollar om endast publiceringsår är ifyllt och söker på publiceringsår
     else if (publicationYear != null) {
-      return bookRepository.findByYear(publicationYear);
+      return bookRepository.findByPublicationYear(publicationYear);
     }
     // Om inga kriterier är ifyllda, returnerar en tom lista
     return List.of(); // Returnerar en tom lista om inga kriterier anges

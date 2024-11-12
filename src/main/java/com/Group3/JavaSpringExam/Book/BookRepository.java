@@ -11,10 +11,11 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitle(String title);
     List<Book> findByAuthor_FirstNameAndAuthor_LastName(String firstName, String lastName);
+    List<Book> findByAuthor_FirstNameContainingAndAuthor_LastNameContaining(String firstName, String lastName);
     List<Book> findByGenresName(String genreName);
     List<Book> findByTitleContaining(String keyword);
     List<Book> findByAvailable(boolean available, Sort sort);
-    List<Book> findByYear(Year publicationYear);
+    List<Book> findByPublicationYear(Year publicationYear);
     Book findFirstByTitleContaining(String keyword);
     boolean existsByTitle(String title);
     long countByAvailable(boolean available);
