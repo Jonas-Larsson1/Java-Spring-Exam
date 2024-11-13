@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -55,6 +56,16 @@ public class BookService {
 
     modelMapper.map(updateBookData, existingBook);
     return bookRepository.save(existingBook);
+  }
+
+  public Boolean removeBook(Long id){
+    Book existingBook = bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
+    if(existingBook.isAvailable()){
+      bookRepository.delete(existingBook);
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

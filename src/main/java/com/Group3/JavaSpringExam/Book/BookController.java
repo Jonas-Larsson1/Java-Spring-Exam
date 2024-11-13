@@ -3,6 +3,8 @@ package com.Group3.JavaSpringExam.Book;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,9 +56,14 @@ public class BookController {
     return bookService.modifyBook(id, book);
   }
 
-//  @DeleteMapping
-//  public Book deleteBook() {
-//
-//  }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteBook(@PathVariable Long id) {
+
+    if(bookService.removeBook(id)) {
+      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.OK);
+    }else{
+      return new ResponseEntity<>("Book is not available", HttpStatus.CONFLICT);
+    }
+  }
 
 }

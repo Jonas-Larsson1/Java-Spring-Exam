@@ -2,14 +2,7 @@ package com.Group3.JavaSpringExam.Loan;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.Group3.JavaSpringExam.Member.Member;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
@@ -37,7 +30,7 @@ public class Loan {
   @JoinColumn(name = "member_id")
   private Member member;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "book_id")
   private Book book;
 }
