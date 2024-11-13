@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Year;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -44,7 +45,7 @@ public class BookService {
   }
 
   public Book getBook(Long id) {
-    return bookRepository.findById(id).orElseThrow();
+    return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
   }
 
   public List<Book> getBook() {
@@ -52,10 +53,20 @@ public class BookService {
   }
 
   public Book modifyBook(Long id, Book updateBookData) {
-    Book existingBook = bookRepository.findById(id).orElseThrow();
+    Book existingBook = bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
 
     modelMapper.map(updateBookData, existingBook);
     return bookRepository.save(existingBook);
+  }
+
+  public Boolean removeBook(Long id){
+    Book existingBook = bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
+    if(existingBook.isAvailable()){
+      bookRepository.delete(existingBook);
+      return true;
+    }else{
+      return false;
+    }
   }
 
   public List<Book> advancedSearch(String title, String authorFirstName, String authorLastName, String genreName, Year publicationYear) {

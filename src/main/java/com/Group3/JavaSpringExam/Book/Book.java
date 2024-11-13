@@ -2,18 +2,8 @@ package com.Group3.JavaSpringExam.Book;
 
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
-import com.Group3.JavaSpringExam.Loan.Loan;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
@@ -43,13 +33,18 @@ public class Book {
   @JoinColumn(name = "author_id")
   private @Valid Author author;
 
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+  // removed CascadeType.PERSIST as this caused errors
+  // when posting new books with existing genres
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(
       name = "books_genres",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "genre_id")
   )
   private List<@Valid Genre> genres;
+
+  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  private Loan loan;
 
   private boolean available;
 }
