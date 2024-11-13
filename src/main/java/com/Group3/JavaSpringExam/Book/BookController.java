@@ -109,7 +109,7 @@ public class BookController {
     return bookRepository.countByAvailable(available);
   }
 
-  @GetMapping("/advancedsearch")
+  @GetMapping("/advancedsearch") //kolla upp grejen med response entity
   public List<Book> advancedSearch(
           @RequestParam(required = false) String title,
           @RequestParam(required = false) String authorFirstName,
