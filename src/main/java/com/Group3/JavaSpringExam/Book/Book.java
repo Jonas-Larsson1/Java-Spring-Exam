@@ -3,6 +3,7 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
+import com.Group3.JavaSpringExam.Loan.Loan;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
