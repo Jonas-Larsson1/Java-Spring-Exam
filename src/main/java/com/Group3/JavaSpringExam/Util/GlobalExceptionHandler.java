@@ -1,4 +1,4 @@
-package com.Group3.JavaSpringExam;
+package com.Group3.JavaSpringExam.Util;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,6 +21,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException exception) {
-        return ResponseEntity.badRequest().body("Sorry, we couldn't find that book!");
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }

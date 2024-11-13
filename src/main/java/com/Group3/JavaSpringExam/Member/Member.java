@@ -2,12 +2,7 @@ package com.Group3.JavaSpringExam.Member;
 
 import com.Group3.JavaSpringExam.Loan.Loan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -35,8 +30,13 @@ public class Member {
   @Email
   private String email;
 
-  @Pattern(regexp = "[0-9]{8}")
-  private String memberNumber;
+  @Column(unique = true)
+  private Long memberNumber;
+
+  @PostPersist
+  private void assignNumericCode() {
+    this.memberNumber = id + 10000000;
+  }
 
   @OneToMany(mappedBy = "member")
   @JsonIgnore

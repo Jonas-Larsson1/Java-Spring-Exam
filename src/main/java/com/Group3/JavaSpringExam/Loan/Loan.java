@@ -2,6 +2,7 @@ package com.Group3.JavaSpringExam.Loan;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.Group3.JavaSpringExam.Member.Member;
+import com.Group3.JavaSpringExam.Util.OnCreate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Loan {
   @PastOrPresent(message = "Invalid date!")
   private LocalDate loanDate;
 
-  @Future(message = "Due date must be in the future!")
+  @Future(groups = OnCreate.class, message = "Due date must be in the future!")
   private LocalDate dueDate;
 
   @PastOrPresent(message = "Invalid date!")

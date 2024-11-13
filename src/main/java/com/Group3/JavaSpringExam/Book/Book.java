@@ -2,7 +2,6 @@ package com.Group3.JavaSpringExam.Book;
 
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
-import com.Group3.JavaSpringExam.Loan.Loan;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -43,7 +42,9 @@ public class Book {
   @JoinColumn(name = "author_id")
   private @Valid Author author;
 
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+  // removed CascadeType.PERSIST as this caused errors
+  // when posting new books with existing genres
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(
       name = "books_genres",
       joinColumns = @JoinColumn(name = "book_id"),
