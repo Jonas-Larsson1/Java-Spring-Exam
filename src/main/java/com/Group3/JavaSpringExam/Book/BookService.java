@@ -58,4 +58,14 @@ public class BookService {
     return bookRepository.save(existingBook);
   }
 
+  public Boolean removeBook(Long id){
+    Book existingBook = bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
+    if(existingBook.isAvailable()){
+      bookRepository.delete(existingBook);
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }

@@ -3,16 +3,7 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
@@ -51,6 +42,9 @@ public class Book {
       inverseJoinColumns = @JoinColumn(name = "genre_id")
   )
   private List<@Valid Genre> genres;
+
+  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  private Loan loan;
 
   private boolean available;
 }
