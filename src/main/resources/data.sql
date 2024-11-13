@@ -49,11 +49,11 @@ INSERT INTO books_genres (book_id, genre_id) VALUES
 
 -- Populate users
 INSERT INTO members (first_name, last_name, email, member_number) VALUES
-    ('Anna', 'Andersson', 'anna.andersson@email.com', 'M20230001'),
-    ('Erik', 'Eriksson', 'erik.eriksson@email.com', 'M20230002'),
-    ('Maria', 'Svensson', 'maria.svensson@email.com', 'M20230003'),
-    ('Johan', 'Johansson', 'johan.johansson@email.com', 'M20230004'),
-    ('Eva', 'Larsson', 'eva.larsson@email.com', 'M20230005');
+    ('Anna', 'Andersson', 'anna.andersson@email.com', 10000001),
+    ('Erik', 'Eriksson', 'erik.eriksson@email.com', 10000002),
+    ('Maria', 'Svensson', 'maria.svensson@email.com', 10000003),
+    ('Johan', 'Johansson', 'johan.johansson@email.com', 10000004),
+    ('Eva', 'Larsson', 'eva.larsson@email.com', 10000005);
 
 -- Populate loans
 INSERT INTO loans (book_id, member_id, loan_date, due_date, returned_date) VALUES

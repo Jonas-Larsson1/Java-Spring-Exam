@@ -2,7 +2,15 @@ package com.Group3.JavaSpringExam.Loan;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.Group3.JavaSpringExam.Member.Member;
-import jakarta.persistence.*;
+import com.Group3.JavaSpringExam.Util.OnCreate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
@@ -20,7 +28,7 @@ public class Loan {
   @PastOrPresent(message = "Invalid date!")
   private LocalDate loanDate;
 
-  @Future(message = "Due date must be in the future!")
+  @Future(groups = OnCreate.class, message = "Due date must be in the future!")
   private LocalDate dueDate;
 
   @PastOrPresent(message = "Invalid date!")
@@ -30,7 +38,7 @@ public class Loan {
   @JoinColumn(name = "member_id")
   private Member member;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "book_id")
   private Book book;
 }
