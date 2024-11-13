@@ -1,0 +1,67 @@
+package com.Group3.JavaSpringExam.Book;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.modelmapper.ModelMapper;
+
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
+
+class BookServiceTest {
+
+    @Mock
+    private ModelMapper modelMapper;
+
+    @Mock
+    private BookRepository bookRepository;
+
+    @InjectMocks
+    private BookService bookService;
+
+    @BeforeEach
+    void setUp() {
+        openMocks(this);
+    }
+
+    @Test
+    void getBookById() {
+        Book book = new Book();
+        book.setId(1L);
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+
+        Book result = bookRepository.findById(1L).orElse(null);
+        assertEquals(1L,result.getId());
+        verify(bookRepository).findById(1L);
+    }
+
+    @Test
+    void saveBook() {
+    }
+
+    @Test
+    void modifyBook() {
+        Book book = new Book();
+        book.setId(1L);
+        book.setTitle("Title");
+        Book modifiedBook = new Book();
+        modifiedBook.setTitle("New Title");
+
+        when(bookRepository.save(any(Book.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+
+        Book bookResult = bookService.modifyBook(1L, modifiedBook);
+
+        assertEquals("New Title", bookResult.getTitle());
+        verify(bookRepository).save(book);
+
+
+
+    }
+}

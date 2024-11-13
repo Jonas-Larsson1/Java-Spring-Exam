@@ -67,12 +67,13 @@ class BookControllerTest {
         Book book = new Book();
         book.setId(1L);
         when(bookService.addBook(book)).thenReturn(book);
+
         mockMvc.perform(post("/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"id\":1}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L));
 
-        verify(bookService).addCompleteBook(any(Book.class));
+        verify(bookService).addBook(any(Book.class));
     }
 }

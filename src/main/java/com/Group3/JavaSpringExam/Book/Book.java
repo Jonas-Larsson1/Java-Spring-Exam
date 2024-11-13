@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
+@Data
 public class Book {
 
   @Id
