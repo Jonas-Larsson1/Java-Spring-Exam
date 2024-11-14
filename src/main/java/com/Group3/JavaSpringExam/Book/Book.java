@@ -3,10 +3,13 @@ package com.Group3.JavaSpringExam.Book;
 import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
+import com.Group3.JavaSpringExam.Loan.Loan;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +20,7 @@ import java.util.List;
 @Table(name = "books")
 @Getter
 @Setter
+@Data
 public class Book {
 
   @Id
@@ -44,6 +48,7 @@ public class Book {
   private List<@Valid Genre> genres;
 
   @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  @JsonBackReference
   private Loan loan;
 
   private boolean available;

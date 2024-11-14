@@ -79,19 +79,19 @@ public class BookController {
   // Sök efter böcker baserat på författarens förnamn och efternamn
   @GetMapping("/searchByAuthor")
   public List<Book> searchBooksByAuthor(@RequestParam String firstName, @RequestParam String lastName) {
-    return bookRepository.findByAuthor_FirstNameAndAuthor_LastName(firstName, lastName);
+    return bookRepository.findByAuthor_FirstNameIgnoreCaseAndAuthor_LastNameIgnoreCase(firstName, lastName);
   }
 
   // Sök efter böcker baserat på genre
   @GetMapping("/searchByGenre")
   public List<Book> searchBooksByGenre(@RequestParam String genreName) {
-    return bookRepository.findByGenresName(genreName);
+    return bookRepository.findByGenresNameIgnoreCase(genreName);
   }
 
   // Sök efter böcker som innehåller ett nyckelord i titeln
   @GetMapping("/searchByKeyword")
   public List<Book> searchBooksByKeyword(@RequestParam String keyword) {
-    return bookRepository.findByTitleContaining(keyword);
+    return bookRepository.findByTitleContainingIgnoreCase(keyword);
   }
 
   // Sök efter böcker som är tillgängliga (eller ej) och sortera resultatet
@@ -105,7 +105,7 @@ public class BookController {
   // Hämta den första boken som matchar ett nyckelord i titeln
   @GetMapping("/firstBookByKeyword")
   public Book getFirstBookByKeyword(@RequestParam String keyword) {
-    return bookRepository.findFirstByTitleContaining(keyword);
+    return bookRepository.findFirstByTitleContainingIgnoreCase(keyword);
   }
 
   // Kontrollera om en bok med en viss titel finns

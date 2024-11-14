@@ -10,21 +10,21 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitle(String title);
-    List<Book> findByAuthor_FirstNameAndAuthor_LastName(String firstName, String lastName);
-    List<Book> findByAuthor_FirstNameContainingAndAuthor_LastNameContaining(String firstName, String lastName);
-    List<Book> findByGenresName(String genreName);
-    List<Book> findByTitleContaining(String keyword);
+    List<Book> findByAuthor_FirstNameIgnoreCaseAndAuthor_LastNameIgnoreCase(String firstName, String lastName);
+    List<Book> findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(String firstName, String lastName);
+    List<Book> findByGenresNameIgnoreCase(String genreName);
+    List<Book> findByTitleContainingIgnoreCase(String keyword);
     List<Book> findByAvailable(boolean available, Sort sort);
     List<Book> findByPublicationYear(Year publicationYear);
-    Book findFirstByTitleContaining(String keyword);
+    Book findFirstByTitleContainingIgnoreCase(String keyword);
     boolean existsByTitle(String title);
     long countByAvailable(boolean available);
 
-    List<Book> findByTitleContainingAndAuthor_FirstNameContainingAndAuthor_LastNameContaining(
+    List<Book> findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(
             String title, String authorFirstName, String authorLastName);
 
-    List<Book> findByTitleContainingAndGenres_NameContaining(String title, String genreName);
+    List<Book> findByTitleContainingIgnoreCaseAndGenres_NameContainingIgnoreCase(String title, String genreName);
 
-    List<Book> findByTitleContainingAndAuthor_FirstNameContainingAndAuthor_LastNameContainingAndGenres_NameContainingAndPublicationYear(
+    List<Book> findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCaseAndGenres_NameContainingIgnoreCaseAndPublicationYear(
             String title, String authorFirstName, String authorLastName, String genreName, Year publicationYear);
 }

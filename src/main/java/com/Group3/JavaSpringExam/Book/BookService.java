@@ -72,29 +72,29 @@ public class BookService {
   public List<Book> advancedSearch(String title, String authorFirstName, String authorLastName, String genreName, Year publicationYear) {
     // Kollar om alla sökparametrar är ifyllda och anropar den mest specifika sökmetoden
     if (title != null && authorFirstName != null && authorLastName != null && genreName != null && publicationYear != null) {
-      return bookRepository.findByTitleContainingAndAuthor_FirstNameContainingAndAuthor_LastNameContainingAndGenres_NameContainingAndPublicationYear(
+      return bookRepository.findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCaseAndGenres_NameContainingIgnoreCaseAndPublicationYear(
               title, authorFirstName, authorLastName, genreName, publicationYear);
     }
     // Kollar om endast titel, författarens förnamn och efternamn är ifyllda
     else if (title != null && authorFirstName != null && authorLastName != null) {
-      return bookRepository.findByTitleContainingAndAuthor_FirstNameContainingAndAuthor_LastNameContaining(
+      return bookRepository.findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(
               title, authorFirstName, authorLastName);
     }
     // Kollar om endast titel och genre är ifyllda
     else if (title != null && genreName != null) {
-      return bookRepository.findByTitleContainingAndGenres_NameContaining(title, genreName);
+      return bookRepository.findByTitleContainingIgnoreCaseAndGenres_NameContainingIgnoreCase(title, genreName);
     }
     // Kollar om endast titel är ifyllt och söker på titel
     else if (title != null) {
-      return bookRepository.findByTitleContaining(title);
+      return bookRepository.findByTitleContainingIgnoreCase(title);
     }
     // Kollar om endast författarens förnamn och efternamn är ifyllda och söker på dessa
     else if (authorFirstName != null && authorLastName != null) {
-      return bookRepository.findByAuthor_FirstNameContainingAndAuthor_LastNameContaining(authorFirstName, authorLastName);
+      return bookRepository.findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(authorFirstName, authorLastName);
     }
     // Kollar om endast genre är ifyllt och söker på genre
     else if (genreName != null) {
-      return bookRepository.findByGenresName(genreName);
+      return bookRepository.findByGenresNameIgnoreCase(genreName);
     }
     // Kollar om endast publiceringsår är ifyllt och söker på publiceringsår
     else if (publicationYear != null) {
