@@ -102,7 +102,7 @@ public class BookService {
     }
     // Kollar om endast genre är ifyllt och söker på genre
     else if (genreName != null) {
-      return bookRepository.findByGenresNameIgnoreCase(genreName);
+      return bookRepository.findByGenresNameContainingIgnoreCase(genreName);
     }
     // Kollar om endast publiceringsår är ifyllt och söker på publiceringsår
     else if (publicationYear != null) {

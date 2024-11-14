@@ -16,12 +16,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthor_FirstNameIgnoreCaseAndAuthor_LastNameIgnoreCase(String firstName, String lastName);
 
     List<Book> findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(String firstName, String lastName);
-    List<Book> findByGenresNameIgnoreCase(String genreName);
+    List<Book> findByGenresNameContainingIgnoreCase(String genreName);
     List<Book> findByTitleContainingIgnoreCase(String keyword);
     List<Book> findByAvailable(boolean available, Sort sort);
     List<Book> findByPublicationYear(Year publicationYear);
-    Book findFirstByTitleContainingIgnoreCase(String keyword);
-    boolean existsByTitle(String title);
     long countByAvailable(boolean available);
 
     List<Book> findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(

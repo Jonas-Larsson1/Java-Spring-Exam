@@ -85,7 +85,7 @@ public class BookController {
   // Sök efter böcker baserat på genre
   @GetMapping("/searchByGenre")
   public List<Book> searchBooksByGenre(@RequestParam String genreName) {
-    return bookRepository.findByGenresNameIgnoreCase(genreName);
+    return bookRepository.findByGenresNameContainingIgnoreCase(genreName);
   }
 
   // Sök efter böcker som innehåller ett nyckelord i titeln
@@ -102,25 +102,13 @@ public class BookController {
     return bookRepository.findByAvailable(available, sort);
   }
 
-  // Hämta den första boken som matchar ett nyckelord i titeln
-  @GetMapping("/firstBookByKeyword")
-  public Book getFirstBookByKeyword(@RequestParam String keyword) {
-    return bookRepository.findFirstByTitleContainingIgnoreCase(keyword);
-  }
-
-  // Kontrollera om en bok med en viss titel finns
-  @GetMapping("/existsByTitle")
-  public boolean checkBookExistsByTitle(@RequestParam String title) {
-    return bookRepository.existsByTitle(title);
-  }
-
   // Räkna antalet tillgängliga eller utlånade böcker
   @GetMapping("/countByAvailability")
   public long countBooksByAvailability(@RequestParam boolean available) {
     return bookRepository.countByAvailable(available);
   }
 
-  @GetMapping("/advancedsearch") //kolla upp grejen med response entity
+  @GetMapping("/advancedsearch") //fixa grejen med response entity
   public List<Book> advancedSearch(
           @RequestParam(required = false) String title,
           @RequestParam(required = false) String authorFirstName,
