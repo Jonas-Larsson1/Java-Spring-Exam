@@ -75,6 +75,18 @@ public class BookService {
       return bookRepository.findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCaseAndGenres_NameContainingIgnoreCaseAndPublicationYear(
               title, authorFirstName, authorLastName, genreName, publicationYear);
     }
+    // Kollar om endast författarens förnamn är ifyllt
+    else if (authorFirstName != null) {
+      return bookRepository.findByAuthor_FirstNameContainingIgnoreCase(authorFirstName);
+    }
+    // Kollar om endast författarens efternamn är ifyllt
+    else if (authorLastName != null) {
+      return bookRepository.findByAuthor_LastNameContainingIgnoreCase(authorLastName);
+    }
+    // Kollar om endast författarens förnamn och efternamn är ifyllda och söker på dessa
+    else if (authorFirstName != null && authorLastName != null) {
+      return bookRepository.findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(authorFirstName, authorLastName);
+    }
     // Kollar om endast titel, författarens förnamn och efternamn är ifyllda
     else if (title != null && authorFirstName != null && authorLastName != null) {
       return bookRepository.findByTitleContainingIgnoreCaseAndAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(
@@ -87,10 +99,6 @@ public class BookService {
     // Kollar om endast titel är ifyllt och söker på titel
     else if (title != null) {
       return bookRepository.findByTitleContainingIgnoreCase(title);
-    }
-    // Kollar om endast författarens förnamn och efternamn är ifyllda och söker på dessa
-    else if (authorFirstName != null && authorLastName != null) {
-      return bookRepository.findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(authorFirstName, authorLastName);
     }
     // Kollar om endast genre är ifyllt och söker på genre
     else if (genreName != null) {
