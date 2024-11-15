@@ -4,6 +4,7 @@ import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
 import com.Group3.JavaSpringExam.Loan.Loan;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
@@ -45,6 +46,7 @@ public class Book {
   private List<@Valid Genre> genres;
 
   @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  @JsonBackReference
   private Loan loan;
 
   private boolean available;
