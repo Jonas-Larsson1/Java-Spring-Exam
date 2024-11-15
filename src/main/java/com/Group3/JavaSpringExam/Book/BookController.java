@@ -73,19 +73,19 @@ public class BookController {
   // Sök efter böcker med exakt titel
   @GetMapping("/searchByTitle")
   public List<Book> searchBooksByTitle(@RequestParam String title) {
-    return bookRepository.findByTitle(title);
+    return bookRepository.findByTitleContainingIgnoreCase(title);
   }
 
   // Sök efter böcker baserat på författarens förnamn och efternamn
   @GetMapping("/searchByAuthor")
   public List<Book> searchBooksByAuthor(@RequestParam String firstName, @RequestParam String lastName) {
-    return bookRepository.findByAuthor_FirstNameIgnoreCaseAndAuthor_LastNameIgnoreCase(firstName, lastName);
+    return bookRepository.findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(firstName, lastName);
   }
 
   // Sök efter böcker baserat på genre
   @GetMapping("/searchByGenre")
   public List<Book> searchBooksByGenre(@RequestParam String genreName) {
-    return bookRepository.findByGenresNameContainingIgnoreCase(genreName);
+    return bookRepository.findByGenres_NameContainingIgnoreCase(genreName);
   }
 
   // Sök efter böcker som innehåller ett nyckelord i titeln
