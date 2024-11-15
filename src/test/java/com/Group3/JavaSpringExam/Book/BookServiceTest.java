@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.stubbing.Answer;
 import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
@@ -52,15 +53,12 @@ class BookServiceTest {
         Book modifiedBook = new Book();
         modifiedBook.setTitle("New Title");
 
-        when(bookRepository.save(any(Book.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        when(bookRepository.save(any(Book.class))).thenReturn(modifiedBook);
 
         Book bookResult = bookService.modifyBook(1L, modifiedBook);
 
         assertEquals("New Title", bookResult.getTitle());
         verify(bookRepository).save(book);
-
-
-
     }
 }
