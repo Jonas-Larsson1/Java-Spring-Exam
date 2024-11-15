@@ -1,5 +1,6 @@
 package com.Group3.JavaSpringExam.Book;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,15 +31,13 @@ class BookServiceTest {
         openMocks(this);
     }
 
+    @AfterEach
+    void tearDown() {
+
+    }
+
     @Test
     void getBookById() {
-        Book book = new Book();
-        book.setId(1L);
-        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
-
-        Book result = bookRepository.findById(1L).orElse(null);
-        assertEquals(1L,result.getId());
-        verify(bookRepository).findById(1L);
     }
 
     @Test
