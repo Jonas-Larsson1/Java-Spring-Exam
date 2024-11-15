@@ -41,6 +41,7 @@ public class BookService {
     Optional<Author> existingAuthor = authorService.findByName(author);
       existingAuthor.ifPresentOrElse(book::setAuthor, () ->
         authorRepository.save(author));
+    book.setAvailable(true);
 
     return bookRepository.save(book);
   }
