@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -67,6 +69,26 @@ public class BookService {
     }else{
       return false;
     }
+  }
+
+  public List<Book> search(String searchKeywords) {
+    // Dela upp sökord i en lista
+    String[] keywords = searchKeywords.toLowerCase().split("\\s+");
+
+    // Hämta alla böcker först och filtrera sedan
+    List<Book> books = bookRepository.findAll();
+    for (String keyword : keywords) {
+      books = books.stream()
+              .filter(book ->
+                      book.getTitle().toLowerCase().contains(keyword) ||
+                              book.getAuthor().getFirstName().toLowerCase().contains(keyword) ||
+                              book.getAuthor().getLastName().toLowerCase().contains(keyword) ||
+                              book.getGenres().stream().anyMatch(genre -> genre.getName().toLowerCase().contains(keyword)) ||
+                              (book.getPublicationYear() != null && book.getPublicationYear().toString().contains(keyword))
+              )
+              .collect(Collectors.toList());
+    }
+    return books;
   }
 
   public List<Book> advancedSearch(String title, String authorFirstName, String authorLastName, String genreName, Year publicationYear) {
@@ -205,9 +227,4 @@ public class BookService {
     // Om inga kriterier är ifyllda, returnerar en tom lista
     return List.of(); // Returnerar en tom lista om inga kriterier anges
   }
-
-
-
-
-
 }

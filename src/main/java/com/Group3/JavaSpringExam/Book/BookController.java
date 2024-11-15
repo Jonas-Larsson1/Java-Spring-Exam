@@ -108,6 +108,12 @@ public class BookController {
     return bookRepository.countByAvailable(available);
   }
 
+  @GetMapping("/search")
+  public List<Book> searchBooks(
+          @RequestParam(required = false) String searchKeywords) {
+    return bookService.search(searchKeywords);
+  }
+
   @GetMapping("/advancedsearch") //fixa grejen med response entity
   public List<Book> advancedSearch(
           @RequestParam(required = false) String title,
@@ -118,10 +124,4 @@ public class BookController {
 
     return bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
   }
-
-//  @DeleteMapping
-//  public Book deleteBook() {
-//
-//  }
-
 }
