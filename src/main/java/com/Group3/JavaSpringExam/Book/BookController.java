@@ -61,7 +61,7 @@ public class BookController {
   public ResponseEntity<String> deleteBook(@PathVariable Long id) {
 
     if(bookService.removeBook(id)) {
-      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.OK);
+      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.NO_CONTENT);
     }else{
       return new ResponseEntity<>("Book is not available", HttpStatus.CONFLICT);
     }
