@@ -9,8 +9,10 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Year;
@@ -18,9 +20,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
   @Id
