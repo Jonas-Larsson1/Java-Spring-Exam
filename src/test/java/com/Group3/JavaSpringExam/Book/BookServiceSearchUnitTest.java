@@ -1,10 +1,7 @@
-package com.Group3.JavaSpringExam;
+package com.Group3.JavaSpringExam.Book;
 
 import com.Group3.JavaSpringExam.Author.Author;
 
-import com.Group3.JavaSpringExam.Book.Book;
-import com.Group3.JavaSpringExam.Book.BookRepository;
-import com.Group3.JavaSpringExam.Book.BookService;
 import com.Group3.JavaSpringExam.Genre.Genre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

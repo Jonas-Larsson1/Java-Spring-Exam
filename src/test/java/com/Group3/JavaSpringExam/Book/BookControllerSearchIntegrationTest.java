@@ -1,4 +1,4 @@
-package com.Group3.JavaSpringExam;
+package com.Group3.JavaSpringExam.Book;
 
 public class BookControllerSearchIntegrationTest {
 }
