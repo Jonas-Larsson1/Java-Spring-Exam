@@ -114,14 +114,20 @@ public class BookController {
     return bookService.search(searchKeywords);
   }
 
-  @GetMapping("/advancedsearch") //fixa grejen med response entity
-  public List<Book> advancedSearch(
+  @GetMapping("/advancedsearch")
+  public ResponseEntity<List<Book>> advancedSearch(
           @RequestParam(required = false) String title,
           @RequestParam(required = false) String authorFirstName,
           @RequestParam(required = false) String authorLastName,
           @RequestParam(required = false) String genreName,
           @RequestParam(required = false) Year publicationYear) {
 
-    return bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
+    List<Book> books = bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
+
+    if (books.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(books);
+    }
+    return ResponseEntity.ok(books);
   }
+
 }
