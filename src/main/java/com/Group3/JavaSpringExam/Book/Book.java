@@ -4,20 +4,14 @@ import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
 import com.Group3.JavaSpringExam.Loan.Loan;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.Group3.JavaSpringExam.Loan.Loan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.Year;
 import java.util.List;
 
