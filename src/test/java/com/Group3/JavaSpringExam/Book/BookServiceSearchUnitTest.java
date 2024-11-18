@@ -36,14 +36,14 @@ class BookServiceSearchUnitTest {
         mockAuthor1.setLastName("Rowling");
 
         Author mockAuthor2 = new Author();
-        mockAuthor2.setFirstName("Stephen");
-        mockAuthor2.setLastName("King");
+        mockAuthor2.setFirstName("Harry");
+        mockAuthor2.setLastName("Martinsson");
 
         Genre mockGenre1 = new Genre();
         mockGenre1.setName("Fantasy");
 
         Genre mockGenre2 = new Genre();
-        mockGenre2.setName("Horror");
+        mockGenre2.setName("Science Fiction");
 
         Book book1 = new Book();
         book1.setTitle("Harry Potter and the Sorcerer's Stone");
@@ -58,7 +58,7 @@ class BookServiceSearchUnitTest {
         book2.setGenres(List.of(mockGenre1));
 
         Book book3 = new Book();
-        book3.setTitle("Cujo");
+        book3.setTitle("Aniara");
         book3.setAuthor(mockAuthor2);
         book3.setPublicationYear(Year.of(1999));
         book3.setGenres(List.of(mockGenre2));
@@ -76,9 +76,9 @@ class BookServiceSearchUnitTest {
     @Test
     void search() {
         //act
-        List<Book> books = bookService.search("horror");
+        List<Book> books = bookService.search("harry potter");
         //assert
-        assertEquals(1, books.size());
+        assertEquals(2, books.size());
     }
 
     @Test
