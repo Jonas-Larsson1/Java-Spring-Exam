@@ -1,24 +1,23 @@
 package com.Group3.JavaSpringExam.Book;
 
 import com.Group3.JavaSpringExam.Author.Author;
-
 import com.Group3.JavaSpringExam.Genre.Genre;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Year;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
 
-@SpringBootTest
-public class BookServiceSearchUnitTest {
+class BookServiceSearchUnitTest {
+
+    private AutoCloseable mocks;
 
     @Mock
     private BookRepository bookRepository;
@@ -26,80 +25,65 @@ public class BookServiceSearchUnitTest {
     @InjectMocks
     private BookService bookService;
 
+    private List<Book> mockBooks;
+
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        mocks = openMocks(this);
+
+        Author mockAuthor1 = new Author();
+        mockAuthor1.setFirstName("J.K.");
+        mockAuthor1.setLastName("Rowling");
+
+        Author mockAuthor2 = new Author();
+        mockAuthor2.setFirstName("Stephen");
+        mockAuthor2.setLastName("King");
+
+        Genre mockGenre1 = new Genre();
+        mockGenre1.setName("Fantasy");
+
+        Genre mockGenre2 = new Genre();
+        mockGenre2.setName("Horror");
+
+        Book book1 = new Book();
+        book1.setTitle("Harry Potter and the Sorcerer's Stone");
+        book1.setAuthor(mockAuthor1);
+        book1.setPublicationYear(Year.of(1999));
+        book1.setGenres(List.of(mockGenre1));
+
+        Book book2 = new Book();
+        book2.setTitle("Harry Potter and the Chamber of Secrets");
+        book2.setAuthor(mockAuthor1);
+        book2.setPublicationYear(Year.of(1999));
+        book2.setGenres(List.of(mockGenre1));
+
+        Book book3 = new Book();
+        book3.setTitle("Cujo");
+        book3.setAuthor(mockAuthor2);
+        book3.setPublicationYear(Year.of(1999));
+        book3.setGenres(List.of(mockGenre2));
+
+        List<Book> mockBooks = List.of(book1, book2, book3);
+        when(bookRepository.findAll()).thenReturn(mockBooks);
+
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        mocks.close();
     }
 
     @Test
-    void testSearch() {
-        // Mockdata
-        Book book1 = new Book();
-        book1.setTitle("Harry Potter");
-        book1.setPublicationYear(Year.of(1997));
-        Author author1 = new Author();
-        author1.setFirstName("J.K.");
-        author1.setLastName("Rowling");
-        book1.setAuthor(author1);
-        Genre genre1 = new Genre();
-        genre1.setName("Fantasy");
-        book1.setGenres(List.of(genre1));
-
-        Book book2 = new Book();
-        book2.setTitle("The Hobbit");
-        book2.setPublicationYear(Year.of(1937));
-        Author author2 = new Author();
-        author2.setFirstName("J.R.R.");
-        author2.setLastName("Tolkien");
-        book2.setAuthor(author2);
-
-        when(bookRepository.findAll()).thenReturn(List.of(book1, book2));
-
-        System.out.println("Mockade böcker: " + bookRepository.findAll());
-
-
-        // Kör metoden vi testar
-        List<Book> result = bookService.search("Harry");
-
-        // Debugging-utskrifter
-        System.out.println("Resultatstorlek: " + result.size());
-        result.forEach(book -> System.out.println("Hittad bok: " + book.getTitle()));
-
-        // Verifiering
-        assertEquals(1, result.size(), "Sökresultatet borde innehålla exakt en bok.");
-        assertEquals("Harry Potter", result.get(0).getTitle(), "Fel bok returnerades.");
+    void search() {
+        //act
+        List<Book> books = bookService.search("horror");
+        //assert
+        assertEquals(1, books.size());
     }
-
-
 
     @Test
-    void testSearchMultipleKeywords() {
-        // Mockdata
-        Book book1 = new Book();
-        book1.setTitle("Harry Potter");
-        book1.setPublicationYear(Year.of(1997));
-        Author author1 = new Author();
-        author1.setFirstName("J.K.");
-        author1.setLastName("Rowling");
-        book1.setAuthor(author1);
-
-        Book book2 = new Book();
-        book2.setTitle("The Hobbit");
-        book2.setPublicationYear(Year.of(1937));
-        Author author2 = new Author();
-        author2.setFirstName("J.R.R.");
-        author2.setLastName("Tolkien");
-        book2.setAuthor(author2);
-
-        // Mocka repository-svaret
-        when(bookRepository.findAll()).thenReturn(Arrays.asList(book1, book2));
-
-        // Kör metoden vi testar
-        List<Book> result = bookService.search("Harry Tolkien");
-
-        // Verifiera att inga böcker returneras (ingen bok matchar båda sökorden)
-        assertEquals(0, result.size());
+    void advancedSearch() {
+        List<Book> books = bookService.advancedSearch("harry","","king","", null);
+        assertEquals(0, books.size());
     }
-
-
 }
