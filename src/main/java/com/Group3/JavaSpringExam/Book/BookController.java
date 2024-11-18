@@ -110,7 +110,7 @@ public class BookController {
 
   @GetMapping("/search")
   public List<Book> searchBooks(
-          @RequestParam(required = false) String searchKeywords) {
+          @RequestParam(name = "searchKeywords", required = false) String searchKeywords) {
     return bookService.search(searchKeywords);
   }
 
