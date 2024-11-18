@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,9 +51,6 @@ public class BookController {
   public Book readBook(@PathVariable Long id) {
     return bookService.getBook(id);
   }
-
-//  @GetMapping
-//  metod för att ta emot olika parametrar, t.ex. titel, författare, osv, använd parameters
 
   @PutMapping("/{id}")
   public Book updateBook(@PathVariable Long id, @RequestBody @Valid Book book) {
