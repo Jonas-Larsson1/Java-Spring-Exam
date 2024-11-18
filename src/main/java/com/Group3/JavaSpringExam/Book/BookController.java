@@ -74,8 +74,8 @@ public class BookController {
     return bookService.search(searchKeywords);
   }
 
-  @GetMapping("/advancedsearch") //fixa grejen med response entity
-  public List<Book> advancedSearch(
+  @GetMapping("/advancedsearch")
+  public ResponseEntity<List<Book>> advancedSearch(
           @RequestParam(name = "title", required = false) String title,
           @RequestParam(name = "authorFirstName", required = false) String authorFirstName,
           @RequestParam(name = "authorLastName", required = false) String authorLastName,
@@ -89,5 +89,6 @@ public class BookController {
     }
     return ResponseEntity.ok(books);
   }
+
 
 }
