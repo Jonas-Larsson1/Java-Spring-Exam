@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="483e4367-02c2-4e33-a716-ff5d368ec3dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaSpringExam.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Author/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Author/AuthorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Author/AuthorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookAdminDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookMemberDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Book/BookService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Genre/Genre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/JavaSpringExamApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Loan/Loan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Loan/LoanController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Loan/LoanDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Loan/LoanRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Loan/LoanService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Member/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Member/MemberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Member/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Member/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Util/Config/ModelMapperConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Util/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Group3/JavaSpringExam/Util/OnCreate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Book/BookControllerIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Book/BookControllerSearchIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Book/BookControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Book/BookServiceSearchUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Book/BookServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/JavaSpringExamApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Loan/LoanControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Group3/JavaSpringExam/Member/MemberControllerTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2p1VkguUckE5mGEzwiC9DQAOske" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Frontend-setup&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/benja/Java/JavaSpringExam/Backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\benja\Java\JavaSpringExam\Backend" />
+      <recent name="C:\Users\benja\Java\JavaSpringExam" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="JavaSpringExamApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="JavaSpringExam" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.Group3.JavaSpringExam.JavaSpringExamApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="483e4367-02c2-4e33-a716-ff5d368ec3dc" name="Changes" comment="" />
+      <created>1731933718350</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731933718350</updated>
+      <workItem from="1731933723626" duration="385000" />
+      <workItem from="1731934339803" duration="1438000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
