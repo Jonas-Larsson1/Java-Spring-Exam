@@ -33,8 +33,9 @@ public class BookController {
   }
 
   @PostMapping
-  public Book createBook(@RequestBody @Valid Book book) {
-    return bookService.addBook(book);
+  public ResponseEntity<Book> createBook(@RequestBody @Valid Book book) {
+    Book createdBook = bookService.addBook(book);
+    return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
   }
 
   @PostMapping("/author")
@@ -61,7 +62,7 @@ public class BookController {
   public ResponseEntity<String> deleteBook(@PathVariable Long id) {
 
     if(bookService.removeBook(id)) {
-      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.OK);
+      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.NO_CONTENT);
     }else{
       return new ResponseEntity<>("Book is not available", HttpStatus.CONFLICT);
     }
