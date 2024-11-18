@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,9 +52,6 @@ public class BookController {
     return bookService.getBook(id);
   }
 
-//  @GetMapping
-//  metod för att ta emot olika parametrar, t.ex. titel, författare, osv, använd parameters
-
   @PutMapping("/{id}")
   public Book updateBook(@PathVariable Long id, @RequestBody @Valid Book book) {
     return bookService.modifyBook(id, book);
@@ -69,43 +65,6 @@ public class BookController {
     }else{
       return new ResponseEntity<>("Book is not available", HttpStatus.CONFLICT);
     }
-  }
-  // Sök efter böcker med exakt titel
-  @GetMapping("/searchByTitle")
-  public List<Book> searchBooksByTitle(@RequestParam String title) {
-    return bookRepository.findByTitleContainingIgnoreCase(title);
-  }
-
-  // Sök efter böcker baserat på författarens förnamn och efternamn
-  @GetMapping("/searchByAuthor")
-  public List<Book> searchBooksByAuthor(@RequestParam String firstName, @RequestParam String lastName) {
-    return bookRepository.findByAuthor_FirstNameContainingIgnoreCaseAndAuthor_LastNameContainingIgnoreCase(firstName, lastName);
-  }
-
-  // Sök efter böcker baserat på genre
-  @GetMapping("/searchByGenre")
-  public List<Book> searchBooksByGenre(@RequestParam String genreName) {
-    return bookRepository.findByGenres_NameContainingIgnoreCase(genreName);
-  }
-
-  // Sök efter böcker som innehåller ett nyckelord i titeln
-  @GetMapping("/searchByKeyword")
-  public List<Book> searchBooksByKeyword(@RequestParam String keyword) {
-    return bookRepository.findByTitleContainingIgnoreCase(keyword);
-  }
-
-  // Sök efter böcker som är tillgängliga (eller ej) och sortera resultatet
-  @GetMapping("/searchByAvailability")
-  public List<Book> searchBooksByAvailability(@RequestParam boolean available,
-                                              @RequestParam(required = false) String sortBy) {
-    Sort sort = Sort.by(Sort.Direction.ASC, sortBy != null ? sortBy : "title");
-    return bookRepository.findByAvailable(available, sort);
-  }
-
-  // Räkna antalet tillgängliga eller utlånade böcker
-  @GetMapping("/countByAvailability")
-  public long countBooksByAvailability(@RequestParam boolean available) {
-    return bookRepository.countByAvailable(available);
   }
 
   @GetMapping("/search")
@@ -122,6 +81,12 @@ public class BookController {
           @RequestParam(name = "genreName", required = false) String genreName,
           @RequestParam(name = "publicationYear", required = false) Year publicationYear) {
 
-    return bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
+    List<Book> books = bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
+
+    if (books.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(books);
+    }
+    return ResponseEntity.ok(books);
   }
+
 }
