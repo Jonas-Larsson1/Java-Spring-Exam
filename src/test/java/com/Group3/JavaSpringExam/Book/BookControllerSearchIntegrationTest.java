@@ -49,7 +49,7 @@ class BookControllerSearchIntegrationTest {
         book3 = bookRepository.save(book3);
 
         mockMvc.perform(get("/book/search")
-                        .param("searchKeywords", book3.getTitle())) // Skicka sökparameter
+                        .param("searchKeywords", book3.getTitle()))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$[0].title").value("Finally Test book 3"));
     }
