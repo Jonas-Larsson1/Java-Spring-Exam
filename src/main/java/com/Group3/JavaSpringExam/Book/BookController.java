@@ -116,11 +116,11 @@ public class BookController {
 
   @GetMapping("/advancedsearch") //fixa grejen med response entity
   public List<Book> advancedSearch(
-          @RequestParam(required = false) String title,
-          @RequestParam(required = false) String authorFirstName,
-          @RequestParam(required = false) String authorLastName,
-          @RequestParam(required = false) String genreName,
-          @RequestParam(required = false) Year publicationYear) {
+          @RequestParam(name = "title", required = false) String title,
+          @RequestParam(name = "authorFirstName", required = false) String authorFirstName,
+          @RequestParam(name = "authorLastName", required = false) String authorLastName,
+          @RequestParam(name = "genreName", required = false) String genreName,
+          @RequestParam(name = "publicationYear", required = false) Year publicationYear) {
 
     return bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
   }
