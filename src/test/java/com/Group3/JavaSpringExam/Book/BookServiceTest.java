@@ -5,21 +5,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.stubbing.Answer;
-import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class BookServiceTest {
 
-    @Mock
-    private ModelMapper modelMapper;
+    private AutoCloseable mocks;
 
     @Mock
     private BookRepository bookRepository;
@@ -29,20 +26,37 @@ class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-        openMocks(this);
+        mocks = openMocks(this);
     }
 
     @AfterEach
-    void tearDown() {
-
+    void tearDown() throws Exception {
+        mocks.close();
     }
 
     @Test
-    void getBookById() {
+    void addBook() {
     }
 
     @Test
-    void saveBook() {
+    void addCompleteBook() {
+    }
+
+    @Test
+    void getBook() {
+        Book book = new Book();
+        book.setId(1L);
+
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        Book result = bookService.getBook(1L);
+
+        assertEquals(1L, result.getId());
+
+        verify(bookRepository).findById(1L);
+    }
+
+    @Test
+    void testGetBook() {
     }
 
     @Test
