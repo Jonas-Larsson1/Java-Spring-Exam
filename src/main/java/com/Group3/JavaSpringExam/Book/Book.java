@@ -6,6 +6,7 @@ import com.Group3.JavaSpringExam.Genre.Genre;
 import com.Group3.JavaSpringExam.Loan.Loan;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.Group3.JavaSpringExam.Loan.Loan;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -52,7 +53,7 @@ public class Book {
   private List<@Valid Genre> genres;
 
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-  @JsonManagedReference
+  @JsonIgnore
   private List<Loan> loan;
 
   private boolean available;
