@@ -35,7 +35,6 @@ class BookControllerSearchIntegrationTest {
     void setUp() {
     }
 
-
     @Test
     void searchBooks() throws Exception {
         Author author1 = new Author();
@@ -69,6 +68,8 @@ class BookControllerSearchIntegrationTest {
         mockMvc.perform(get("/book/advancedsearch")
                         .param("title", book3.getTitle()))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPath("$[0].title").value("Finally Test book 3"));
+                        .andExpect(jsonPath("$[0].title").value("Finally Test book 3"))
+                        .andExpect(jsonPath("$[0].author.firstName").value("John"))
+                        .andExpect(jsonPath("$[0].author.lastName").value("Doe"));
     }
 }
