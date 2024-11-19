@@ -1,9 +1,10 @@
 package com.Group3.JavaSpringExam.Member;
 
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -15,8 +16,8 @@ public class MemberController {
     }
 
     @GetMapping("/{memberNumber}")
-    public ResponseEntity<Member> getMember(@PathVariable("memberNumber") Long memberNumber) {
-        return new ResponseEntity<>(memberService.getMemberByMemberNumber(memberNumber), HttpStatus.OK );
+    public Member getMemberByNumber(@PathVariable Long memberNumber){
+        return memberService.getByMemberNumber(memberNumber);
     }
 
     @PostMapping
