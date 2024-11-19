@@ -15,6 +15,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/{memberNumber}")
     public Member getMemberByNumber(@PathVariable Long memberNumber){
         return memberService.getByMemberNumber(memberNumber);
