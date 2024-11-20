@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.PastOrPresent;
@@ -39,7 +38,7 @@ public class Loan {
   @JoinColumn(name = "member_id")
   private Member member;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "book_id")
   @JsonManagedReference
   private Book book;

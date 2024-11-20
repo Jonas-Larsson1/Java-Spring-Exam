@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Year;
 import java.util.List;
 
 @RestController
@@ -29,8 +31,9 @@ public class BookController {
   }
 
   @PostMapping
-  public Book createBook(@RequestBody @Valid Book book) {
-    return bookService.addBook(book);
+  public ResponseEntity<Book> createBook(@RequestBody @Valid Book book) {
+    Book createdBook = bookService.addBook(book);
+    return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
   }
 
   @PostMapping("/author")
@@ -48,9 +51,6 @@ public class BookController {
     return bookService.getBook(id);
   }
 
-//  @GetMapping
-//  metod för att ta emot olika parametrar, t.ex. titel, författare, osv, använd parameters
-
   @PutMapping("/{id}")
   public Book updateBook(@PathVariable Long id, @RequestBody @Valid Book book) {
     return bookService.modifyBook(id, book);
@@ -60,10 +60,33 @@ public class BookController {
   public ResponseEntity<String> deleteBook(@PathVariable Long id) {
 
     if(bookService.removeBook(id)) {
-      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.OK);
+      return new ResponseEntity<>("Book succesfully deleted", HttpStatus.NO_CONTENT);
     }else{
       return new ResponseEntity<>("Book is not available", HttpStatus.CONFLICT);
     }
   }
+
+  @GetMapping("/search")
+  public List<Book> searchBooks(
+          @RequestParam(name = "searchKeywords", required = false) String searchKeywords) {
+    return bookService.search(searchKeywords);
+  }
+
+  @GetMapping("/advancedsearch")
+  public ResponseEntity<List<Book>> advancedSearch(
+          @RequestParam(name = "title", required = false) String title,
+          @RequestParam(name = "authorFirstName", required = false) String authorFirstName,
+          @RequestParam(name = "authorLastName", required = false) String authorLastName,
+          @RequestParam(name = "genreName", required = false) String genreName,
+          @RequestParam(name = "publicationYear", required = false) Year publicationYear) {
+
+    List<Book> books = bookService.advancedSearch(title, authorFirstName, authorLastName, genreName, publicationYear);
+
+    if (books.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(books);
+    }
+    return ResponseEntity.ok(books);
+  }
+
 
 }

@@ -14,7 +14,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.util.Date;
@@ -24,6 +26,8 @@ import java.util.List;
 @Entity
 @Table(name = "authors")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
 
   @Id

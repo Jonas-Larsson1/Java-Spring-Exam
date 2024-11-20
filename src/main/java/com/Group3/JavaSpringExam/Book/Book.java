@@ -4,21 +4,22 @@ import com.Group3.JavaSpringExam.Author.Author;
 import com.Group3.JavaSpringExam.Genre.Genre;
 
 import com.Group3.JavaSpringExam.Loan.Loan;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.Year;
 import java.util.List;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
   @Id
@@ -45,9 +46,9 @@ public class Book {
   )
   private List<@Valid Genre> genres;
 
-  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
-  @JsonBackReference
-  private Loan loan;
+  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+  @JsonIgnore
+  private List<Loan> loan;
 
   private boolean available;
 }

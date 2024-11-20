@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/members")
 public class MemberController {
@@ -11,6 +13,11 @@ public class MemberController {
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    @GetMapping("/{memberNumber}")
+    public Member getMemberByNumber(@PathVariable Long memberNumber){
+        return memberService.getByMemberNumber(memberNumber);
     }
 
     @PostMapping
