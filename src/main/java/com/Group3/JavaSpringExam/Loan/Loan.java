@@ -3,6 +3,7 @@ package com.Group3.JavaSpringExam.Loan;
 import com.Group3.JavaSpringExam.Book.Book;
 import com.Group3.JavaSpringExam.Member.Member;
 import com.Group3.JavaSpringExam.Util.OnCreate;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,5 +40,6 @@ public class Loan {
 
   @ManyToOne
   @JoinColumn(name = "book_id")
+  @JsonManagedReference
   private Book book;
 }

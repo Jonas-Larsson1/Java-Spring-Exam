@@ -56,6 +56,7 @@ class MemberControllerTest {
     @Test
     void updateMember() throws Exception {
         Long id = addMemberAndGetId();
+
         String dummyMember = "{\"firstName\": \"Bobby\", \"lastName\": \"Barnes\", \"email\": \"bobby@barnes.org\" }";
 
         mockMvc.perform(put("/members/" + id.toString())
