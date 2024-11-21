@@ -1,5 +1,6 @@
 package com.Group3.JavaSpringExam.Util;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,5 +23,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String,String>> handleConstraintViolationException(ConstraintViolationException exception) {
+        Map<String, String> errors = new HashMap<>();
+        exception.getConstraintViolations().forEach(violation ->
+                errors.put(violation.getPropertyPath().toString(), violation.getMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }
