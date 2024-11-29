@@ -44,4 +44,6 @@ public class Member {
   @OneToMany(mappedBy = "member")
   @JsonIgnore
   private List<Loan> loans;
+
+  private final String role = "USER";
 }

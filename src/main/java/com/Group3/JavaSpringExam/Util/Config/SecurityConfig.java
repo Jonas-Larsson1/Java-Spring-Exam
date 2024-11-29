@@ -1,5 +1,8 @@
 package com.Group3.JavaSpringExam.Util.Config;
 
+import com.Group3.JavaSpringExam.Member.Member;
+import com.Group3.JavaSpringExam.Member.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -17,6 +21,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private MemberService memberService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
@@ -37,15 +45,17 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder().username("Bob")
-                .password(passwordEncoder.encode("Bob"))
-                .roles("USER").build();
-
-        UserDetails admin = User.builder().username("Fred")
-                .password(passwordEncoder.encode("Fred"))
-                .roles("ADMIN").build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+        return memberNr -> {
+            Member member = memberService.getByMemberNumber(Long.parseLong(memberNr));
+            if (member == null) {
+                throw new UsernameNotFoundException("User not found");
+            }
+            return org.springframework.security.core.userdetails.User.builder()
+                    .username(member.getMemberNumber().toString())
+                    .password(passwordEncoder.encode(member.getPassword()))
+                    .roles(member.getRole())
+                    .build();
+        };
     }
 
     @Bean
