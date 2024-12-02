@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.Optional;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -49,12 +51,13 @@ public class SecurityConfig {
             Member member = memberService.getByMemberNumber(Long.parseLong(memberNr));
             if (member == null) {
                 throw new UsernameNotFoundException("User not found");
-            }
+            }else{
             return org.springframework.security.core.userdetails.User.builder()
                     .username(member.getMemberNumber().toString())
                     .password(passwordEncoder.encode(member.getPassword()))
                     .roles(member.getRole())
                     .build();
+            }
         };
     }
 

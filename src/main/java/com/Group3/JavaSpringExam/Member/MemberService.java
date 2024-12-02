@@ -18,13 +18,7 @@ public class MemberService {
     }
 
     public Member getByMemberNumber(Long memberNumber){
-        List<Member> members = memberRepository.findAll();
-        Member foundMember = members.stream().filter(member -> member.getMemberNumber().equals(memberNumber)).findFirst().orElse(null);
-        if(foundMember == null){
-            throw new NoSuchElementException();
-        }else{
-            return foundMember;
-        }
+        return memberRepository.findByMemberNumber(memberNumber);
     }
 
     public Member addMember(Member member) {
