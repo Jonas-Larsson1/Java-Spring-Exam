@@ -63,3 +63,8 @@ INSERT INTO loans (book_id, member_id, loan_date, due_date, returned_date) VALUE
     (1, 4, '2023-12-15', '2024-01-15', '2024-01-14'),
     (3, 5, '2023-12-20', '2024-01-20', '2024-01-18'),
     (6, 1, '2023-12-25', '2024-01-25', '2024-01-23');
+
+INSERT INTO admins (username, password, role) VALUES
+                                                  ( 'admin', '$2a$10$x9jw.Rhfmf8AzWNr/t1Zjucb29yhzlr/N97GwsCdZSD9qSRVcjNKq', 'ADMIN'),
+                                                  ( 'lisa', '$2a$10$eNIaVnDXhMDrRhlCBlqG1.sL6uWlGK2.dzNRw56We6yG8bk7Aah7u', 'LIBRARIAN'),
+                                                  ( 'lars', '$2a$10$TlLS/A34Uklpqocb2ZO8g.p6YKcRB4GPfvv4BJ3Rhv4uFIL5iqNDO', 'LIBRARIAN');
