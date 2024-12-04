@@ -20,11 +20,6 @@ public class MemberController {
         return memberService.getByMemberNumber(memberNumber);
     }
 
-    @PostMapping
-    public ResponseEntity<?> addMember(@RequestBody @Valid Member member) {
-        return ResponseEntity.ok(memberService.addMember(member));
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> updateMember(@PathVariable Long id, @RequestBody @Valid Member member) {
         return ResponseEntity.ok(memberService.updateMember(id, member));

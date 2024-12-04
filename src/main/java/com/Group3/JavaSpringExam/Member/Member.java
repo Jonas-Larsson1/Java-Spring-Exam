@@ -31,6 +31,9 @@ public class Member {
   private String email;
 
   @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+  @Transient
+  private String rawPassword;
+
   private String password;
 
   @Column(unique = true)
