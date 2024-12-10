@@ -2,8 +2,8 @@ package com.Group3.JavaSpringExam.Loan;
 
 import com.Group3.JavaSpringExam.Book.Book;
 import com.Group3.JavaSpringExam.Book.BookRepository;
-import com.Group3.JavaSpringExam.Member.Member;
-import com.Group3.JavaSpringExam.Member.MemberRepository;
+import com.Group3.JavaSpringExam.User.User;
+import com.Group3.JavaSpringExam.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,14 @@ import java.util.NoSuchElementException;
 public class LoanService {
 
   private final LoanRepository loanRepository;
-  private final MemberRepository memberRepository;
+  private final UserRepository userRepository;
   private final BookRepository bookRepository;
 
 
   @Autowired
-  public LoanService(LoanRepository loanRepository, MemberRepository memberRepository, BookRepository bookRepository) {
+  public LoanService(LoanRepository loanRepository, UserRepository userRepository, BookRepository bookRepository) {
     this.loanRepository = loanRepository;
-      this.memberRepository = memberRepository;
+      this.userRepository = userRepository;
       this.bookRepository = bookRepository;
   }
 
@@ -39,7 +39,7 @@ public class LoanService {
   }
 
   public List<Loan> getActiveLoansByMember(Long memberNumber) {
-    Member member = memberRepository.findByMemberNumber(memberNumber);
+    User member = userRepository.findByMemberNumber(memberNumber);
     List<Loan> loans = member.getLoans();
     loans.removeIf(loan -> loan.getReturnedDate() != null);
     return loans;

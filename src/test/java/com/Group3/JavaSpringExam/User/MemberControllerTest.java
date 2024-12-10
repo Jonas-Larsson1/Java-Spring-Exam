@@ -1,4 +1,4 @@
-package com.Group3.JavaSpringExam.Member;
+package com.Group3.JavaSpringExam.User;
 
 import com.jayway.jsonpath.JsonPath;
 import jakarta.transaction.Transactional;

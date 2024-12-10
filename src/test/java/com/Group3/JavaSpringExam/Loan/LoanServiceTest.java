@@ -1,7 +1,7 @@
 package com.Group3.JavaSpringExam.Loan;
 
-import com.Group3.JavaSpringExam.Member.Member;
-import com.Group3.JavaSpringExam.Member.MemberRepository;
+import com.Group3.JavaSpringExam.User.Member;
+import com.Group3.JavaSpringExam.User.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
