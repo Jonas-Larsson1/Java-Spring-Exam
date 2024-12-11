@@ -26,12 +26,6 @@ public class UserController {
         return ResponseEntity.ok(userService.addMember(member));
     }
 
-//    @PreAuthorize("hasRole('MEMBER')")
-//    @PutMapping("/member/{id}")
-//    public ResponseEntity<?> updateMember(@PathVariable Long id, @RequestBody @Valid User member) {
-//        return ResponseEntity.ok(userService.updateMember(id, member));
-//    }
-
     @PutMapping("/member")
     @PreAuthorize("hasRole('MEMBER')")
     public ResponseEntity<?> updateMember(@RequestBody @Valid User member, HttpServletRequest request) {

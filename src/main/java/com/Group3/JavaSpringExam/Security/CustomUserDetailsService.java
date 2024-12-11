@@ -31,5 +31,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 Collections.singletonList(authority)
         );
     }
-
 }

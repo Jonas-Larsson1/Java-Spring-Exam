@@ -45,12 +45,6 @@ public class UserService {
         return userRepository.save(member);
     }
 
-//    public User updateMember(Long id, User member) {
-//        User oldMember = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member not found"));
-//        modelMapper.map(member, oldMember);
-//        return userRepository.save(oldMember);
-//    }
-
     public User updateMember(User updatedMemberInfo, HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         String email = jwtUtil.extractUsername(token);
