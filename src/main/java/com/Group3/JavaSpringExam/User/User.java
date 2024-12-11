@@ -30,13 +30,16 @@ public class User {
   private String lastName;
 
   @Email
+  @NotNull
+  @Column(unique = true)
   private String email;
 
-  @Column(unique = true)
-  private String username;
-
   @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-  @NotNull
+  @Transient
+  @JsonIgnore
+  private String rawPassword;
+
+  @JsonIgnore
   private String password;
 
   @Column(unique = true)
@@ -44,14 +47,16 @@ public class User {
 
   @PostPersist
   private void assignNumericCode() {
-    this.memberNumber = id + 10000000;
+    if (this.getRole().getName().equals("ROLE_MEMBER")) {
+      this.memberNumber = id + 10000000;
+    }
+
   }
 
   @OneToMany(mappedBy = "user")
   @JsonIgnore
   private List<Loan> loans;
 
-  @NotNull
   @ManyToOne(optional = false)
   private Role role;
 

@@ -53,12 +53,12 @@ INSERT INTO roles (name) VALUES
     ('ROLE_ADMIN');
 
 -- Populate users
-INSERT INTO users (first_name, last_name, email, username, password, member_number, role_id) VALUES
-    ('Anna', 'Andersson', 'anna.andersson@email.com', '10000001', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000001, 3),
-    ('Erik', 'Eriksson', 'erik.eriksson@email.com', '10000002', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000002, 1),
-    ('Maria', 'Svensson', 'maria.svensson@email.com', '10000003', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000003, 1),
-    ('Johan', 'Johansson', 'johan.johansson@email.com', '10000004', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000004, 1),
-    ('Eva', 'Larsson', 'eva.larsson@email.com', '10000005', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000005, 1);
+INSERT INTO users (first_name, last_name, email, password, member_number, role_id) VALUES
+    ('Anna', 'Andersson', 'anna.andersson@email.com',  '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000001, 3),
+    ('Erik', 'Eriksson', 'erik.eriksson@email.com',  '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000002, 1),
+    ('Maria', 'Svensson', 'maria.svensson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000003, 1),
+    ('Johan', 'Johansson', 'johan.johansson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000004, 1),
+    ('Eva', 'Larsson', 'eva.larsson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000005, 1);
 
 -- Populate loans
 INSERT INTO loans (book_id, user_id, loan_date, due_date, returned_date) VALUES
