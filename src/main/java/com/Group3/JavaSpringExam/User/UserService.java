@@ -55,6 +55,5 @@ public class UserService {
         modelMapper.map(librarian, oldLibrarian);
         librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
         return "Details updated for librarian " + userRepository.saveAndFlush(librarian).getUsername() + ".";
-
     }
 }

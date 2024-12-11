@@ -48,13 +48,13 @@ INSERT INTO books_genres (book_id, genre_id) VALUES
     (10, 4);
 
 INSERT INTO roles (name) VALUES
-    ('MEMBER'),
-    ('LIBRARIAN'),
-    ('ADMIN');
+    ('ROLE_MEMBER'),
+    ('ROLE_LIBRARIAN'),
+    ('ROLE_ADMIN');
 
 -- Populate users
 INSERT INTO users (first_name, last_name, email, username, password, member_number, role_id) VALUES
-    ('Anna', 'Andersson', 'anna.andersson@email.com', '10000001', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000001, 1),
+    ('Anna', 'Andersson', 'anna.andersson@email.com', '10000001', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000001, 3),
     ('Erik', 'Eriksson', 'erik.eriksson@email.com', '10000002', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000002, 1),
     ('Maria', 'Svensson', 'maria.svensson@email.com', '10000003', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000003, 1),
     ('Johan', 'Johansson', 'johan.johansson@email.com', '10000004', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000004, 1),
