@@ -1,7 +1,7 @@
 package com.Group3.JavaSpringExam.Loan;
 
 import com.Group3.JavaSpringExam.Book.Book;
-import com.Group3.JavaSpringExam.Member.Member;
+import com.Group3.JavaSpringExam.User.User;
 import com.Group3.JavaSpringExam.Util.OnCreate;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
@@ -35,8 +35,8 @@ public class Loan {
   private LocalDate returnedDate;
 
   @ManyToOne
-  @JoinColumn(name = "member_id")
-  private Member member;
+  @JoinColumn(name = "user_id")
+  private User user;
 
   @ManyToOne
   @JoinColumn(name = "book_id")

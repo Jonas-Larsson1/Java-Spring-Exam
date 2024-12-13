@@ -47,16 +47,21 @@ INSERT INTO books_genres (book_id, genre_id) VALUES
     -- Mrs. Dalloway: Classic
     (10, 4);
 
+INSERT INTO roles (name) VALUES
+    ('ROLE_MEMBER'),
+    ('ROLE_LIBRARIAN'),
+    ('ROLE_ADMIN');
+
 -- Populate users
-INSERT INTO members (first_name, last_name, email, member_number) VALUES
-    ('Anna', 'Andersson', 'anna.andersson@email.com', 10000001),
-    ('Erik', 'Eriksson', 'erik.eriksson@email.com', 10000002),
-    ('Maria', 'Svensson', 'maria.svensson@email.com', 10000003),
-    ('Johan', 'Johansson', 'johan.johansson@email.com', 10000004),
-    ('Eva', 'Larsson', 'eva.larsson@email.com', 10000005);
+INSERT INTO users (first_name, last_name, email, password, member_number, role_id) VALUES
+    ('Anna', 'Andersson', 'anna.andersson@email.com',  '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000001, 3),
+    ('Erik', 'Eriksson', 'erik.eriksson@email.com',  '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000002, 2),
+    ('Maria', 'Svensson', 'maria.svensson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000003, 1),
+    ('Johan', 'Johansson', 'johan.johansson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000004, 1),
+    ('Eva', 'Larsson', 'eva.larsson@email.com', '$2a$10$dOUdi8LLYSt3Ac5YvIDWCOo.fIzDWJW89Ivcshz/qFotxdVb3E0ly', 10000005, 1);
 
 -- Populate loans
-INSERT INTO loans (book_id, member_id, loan_date, due_date, returned_date) VALUES
+INSERT INTO loans (book_id, user_id, loan_date, due_date, returned_date) VALUES
     (2, 1, '2024-01-15', '2024-02-15', NULL),
     (5, 2, '2024-01-20', '2024-02-20', NULL),
     (9, 3, '2024-01-25', '2024-02-25', NULL),

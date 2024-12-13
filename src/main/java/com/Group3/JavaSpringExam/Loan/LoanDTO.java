@@ -23,10 +23,10 @@ public class LoanDTO {
         this.loanDate = loan.getLoanDate();
         this.dueDate = loan.getDueDate();
         this.returnedDate = loan.getReturnedDate();
-        if (loan.getMember() != null) {
-            this.borrowerName = loan.getMember().getFirstName() + " " + loan.getMember().getLastName();
-            this.borrowerEmail = loan.getMember().getEmail();
-            this.borrowerMemberNumber = loan.getMember().getMemberNumber();
+        if (loan.getUser() != null) {
+            this.borrowerName = loan.getUser().getFirstName() + " " + loan.getUser().getLastName();
+            this.borrowerEmail = loan.getUser().getEmail();
+            this.borrowerMemberNumber = loan.getUser().getMemberNumber();
         }
     }
 }

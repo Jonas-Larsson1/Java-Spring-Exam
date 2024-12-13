@@ -4,6 +4,7 @@ import com.Group3.JavaSpringExam.Book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class Genre {
 
   @Size(min = 2, max = 50, message = "Please enter a name for this genre.")
   @Pattern(regexp = "^[a-zA-Z]*$", message = "Genre names may only contain letters.")
+  @Column(unique = true, nullable = false)
   private String name;
 
   @ManyToMany(mappedBy = "genres", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
