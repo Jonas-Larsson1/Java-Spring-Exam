@@ -30,9 +30,6 @@ public class Member {
   @Email
   private String email;
 
-  @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-  private String password;
-
   @Column(unique = true)
   private Long memberNumber;
 
