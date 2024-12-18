@@ -38,13 +38,13 @@ public class UserService {
         }
     }
 
-    public UserDTO addMember(UserAuthDTO memberInfo) {
+    public UserDTO addUser(UserAuthDTO memberInfo, String role) {
         // just to make sure no admin rights are granted
         User newUser = new User();
 
         modelMapper.map(memberInfo, newUser);
         newUser.setPassword(passwordEncoder.encode(memberInfo.getRawPassword()));
-        newUser.setRole(roleRepository.findByName("ROLE_MEMBER"));
+        newUser.setRole(roleRepository.findByName(role));
         userRepository.save(newUser);
 
         UserDTO newUserInfo = new UserDTO();
@@ -64,11 +64,11 @@ public class UserService {
         return userRepository.save(currentMemberInfo);
     }
 
-    public String addLibrarian(@Valid User librarian) {
-        librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
-//        librarian.setPassword(passwordEncoder.encode(librarian.getRawPassword()));
-        return "New librarian with email " + userRepository.saveAndFlush(librarian).getEmail() + " added.";
-    }
+//    public String addLibrarian(@Valid User librarian) {
+//        librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
+////        librarian.setPassword(passwordEncoder.encode(librarian.getRawPassword()));
+//        return "New librarian with email " + userRepository.saveAndFlush(librarian).getEmail() + " added.";
+//    }
 
     public String updateLibrarian(Long id, @Valid User librarian) {
         User oldLibrarian = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Librarian not found"));

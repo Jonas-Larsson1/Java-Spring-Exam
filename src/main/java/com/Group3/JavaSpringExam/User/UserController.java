@@ -23,7 +23,13 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
     @PostMapping("/member")
     public ResponseEntity<?> addMember(@RequestBody @Valid UserAuthDTO memberInfo) {
-        return ResponseEntity.ok(userService.addMember(memberInfo));
+        return ResponseEntity.ok(userService.addUser(memberInfo, "ROLE_MEMBER"));
+    }
+
+    @PostMapping("/librarian")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> addLibrarian(@RequestBody @Valid UserAuthDTO librarianInfo) {
+        return ResponseEntity.ok(userService.addUser(librarianInfo, "ROLE_LIBRARIAN"));
     }
 
     @PutMapping("/member")
@@ -32,11 +38,6 @@ public class UserController {
         return ResponseEntity.ok(userService.updateMember(member, request));
     }
 
-    @PostMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addLibrarian(@RequestBody @Valid User librarian) {
-        return ResponseEntity.ok(userService.addLibrarian(librarian));
-    }
 
     @PutMapping("/admin/{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
