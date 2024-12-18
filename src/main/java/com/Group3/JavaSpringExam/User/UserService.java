@@ -42,16 +42,12 @@ public class UserService {
         // just to make sure no admin rights are granted
         User newUser = new User();
 
-        newUser.setFirstName(memberInfo.getFirstName());
-        newUser.setLastName(memberInfo.getLastName());
-        newUser.setEmail(memberInfo.getEmail());
+        modelMapper.map(memberInfo, newUser);
         newUser.setPassword(passwordEncoder.encode(memberInfo.getRawPassword()));
         newUser.setRole(roleRepository.findByName("ROLE_MEMBER"));
-
         userRepository.save(newUser);
 
         UserDTO newUserInfo = new UserDTO();
-
         modelMapper.map(newUser, newUserInfo);
 
         return newUserInfo;

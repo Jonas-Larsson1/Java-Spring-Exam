@@ -11,8 +11,6 @@ import lombok.Data;
 @Data
 public class UserAuthDTO {
 
-  private Long id;
-
   @Size(min = 1, message = "Please enter at least one initial.")
   @Pattern(regexp = "^[a-zA-Z. ]*$", message = "Names may only contain letters.")
   private String firstName;
@@ -26,7 +24,5 @@ public class UserAuthDTO {
   private String email;
 
   @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-  @Transient
-  @JsonIgnore
   private String rawPassword;
 }
