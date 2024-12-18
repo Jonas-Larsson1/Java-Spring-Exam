@@ -28,44 +28,67 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public User getByMemberNumber(Long memberNumber){
+    public UserDTO getByMemberNumber(Long memberNumber){
         List<User> members = userRepository.findAll();
         User foundMember = members.stream().filter(member -> member.getMemberNumber().equals(memberNumber)).findFirst().orElse(null);
         if(foundMember == null){
             throw new NoSuchElementException();
         }else{
-            return foundMember;
+            UserDTO userDTO = new UserDTO();
+            modelMapper.map(foundMember, userDTO);
+            return userDTO;
         }
     }
 
-    public User addMember(User member) {
+    public UserDTO addUser(UserAuthDTO memberInfo, String role) {
         // just to make sure no admin rights are granted
-        member.setRole(roleRepository.findByName("ROLE_MEMBER"));
-        member.setPassword(passwordEncoder.encode(member.getRawPassword()));
-        return userRepository.save(member);
+        User newUser = new User();
+
+        modelMapper.map(memberInfo, newUser);
+        newUser.setPassword(passwordEncoder.encode(memberInfo.getRawPassword()));
+        newUser.setRole(roleRepository.findByName(role));
+        userRepository.save(newUser);
+
+        UserDTO newUserInfo = new UserDTO();
+        modelMapper.map(newUser, newUserInfo);
+
+        return newUserInfo;
     }
 
-    public User updateMember(User updatedMemberInfo, HttpServletRequest request) {
+    public UserDTO updateMember(UserAuthDTO updatedMemberInfo, HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         String email = jwtUtil.extractUsername(token);
         User currentMemberInfo = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Member not found"));
         modelMapper.map(updatedMemberInfo, currentMemberInfo);
+        userRepository.save(currentMemberInfo);
 
-        // make sure member no. cannot change
-        currentMemberInfo.setMemberNumber(currentMemberInfo.getMemberNumber());
-        return userRepository.save(currentMemberInfo);
+        UserDTO userDTO = new UserDTO();
+        modelMapper.map(currentMemberInfo, userDTO);
+
+        return userDTO;
     }
 
-    public String addLibrarian(@Valid User librarian) {
-        librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
-        librarian.setPassword(passwordEncoder.encode(librarian.getRawPassword()));
-        return "New librarian with email " + userRepository.saveAndFlush(librarian).getEmail() + " added.";
-    }
+    public UserDTO updateLibrarian(Long id, @Valid UserAuthDTO updatedLibrarianInfo, HttpServletRequest request) throws Exception {
+        String token = request.getHeader("Authorization").substring(7);
+        String email = jwtUtil.extractUsername(token);
+        UserDTO userDTO = new UserDTO();
 
-    public String updateLibrarian(Long id, @Valid User librarian) {
-        User oldLibrarian = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Librarian not found"));
-        modelMapper.map(librarian, oldLibrarian);
-        librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
-        return "Details updated for librarian with email " + userRepository.saveAndFlush(librarian).getEmail() + ".";
+        User authenticatedUser = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("User not found"));
+        User currentLibrarianInfo;
+
+        if (authenticatedUser.getRole().getName().equals("ROLE_LIBRARIAN")) {
+            currentLibrarianInfo = authenticatedUser;
+        } else if (authenticatedUser.getRole().getName().equals("ROLE_ADMIN")) {
+            currentLibrarianInfo = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Librarian not found"));
+        } else {
+            throw new Exception("How did you get here?");
+        }
+
+        modelMapper.map(updatedLibrarianInfo, currentLibrarianInfo);
+        userRepository.save(currentLibrarianInfo);
+
+        modelMapper.map(currentLibrarianInfo, userDTO);
+
+        return userDTO;
     }
 }

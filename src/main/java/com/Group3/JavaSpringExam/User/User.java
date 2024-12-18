@@ -21,23 +21,12 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Size(min = 1, message = "Please enter at least one initial.")
-  @Pattern(regexp = "^[a-zA-Z. ]*$", message = "Names may only contain letters.")
   private String firstName;
 
-  @Size(min = 2, max = 50, message = "Please enter a full surname.")
-  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Names may only contain letters.")
   private String lastName;
 
-  @Email
-  @NotNull
   @Column(unique = true)
   private String email;
-
-  @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-  @Transient
-  @JsonIgnore
-  private String rawPassword;
 
   @JsonIgnore
   private String password;
