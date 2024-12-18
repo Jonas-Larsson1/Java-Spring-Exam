@@ -1,5 +1,7 @@
 package com.Group3.JavaSpringExam.Security;
 
+import com.Group3.JavaSpringExam.User.UserAuthDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,6 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +30,9 @@ public class AuthenticationController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<String> login(@RequestBody @Valid UserAuthDTO userAuthDTO) {
+        String username = userAuthDTO.getEmail();
+        String password = userAuthDTO.getRawPassword();
 
         try {
             authenticationManager.authenticate(
