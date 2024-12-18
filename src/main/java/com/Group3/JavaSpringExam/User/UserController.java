@@ -16,7 +16,7 @@ public class UserController {
     }
 
     @GetMapping("member/{memberNumber}")
-    public User getMemberByNumber(@PathVariable Long memberNumber){
+    public UserDTO getMemberByNumber(@PathVariable Long memberNumber){
         return userService.getByMemberNumber(memberNumber);
     }
 
@@ -34,14 +34,23 @@ public class UserController {
 
     @PutMapping("/member")
     @PreAuthorize("hasRole('MEMBER')")
-    public ResponseEntity<?> updateMember(@RequestBody @Valid User member, HttpServletRequest request) {
-        return ResponseEntity.ok(userService.updateMember(member, request));
+    public ResponseEntity<?> updateMember(@RequestBody @Valid UserAuthDTO updatedMemberInfo, HttpServletRequest request) {
+        return ResponseEntity.ok(userService.updateMember(updatedMemberInfo, request));
     }
 
 
-    @PutMapping("/admin/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
-    public ResponseEntity<?> updateLibrarian(@PathVariable Long id, @RequestBody @Valid User librarian) {
-        return ResponseEntity.ok(userService.updateLibrarian(id, librarian));
+    @PutMapping("/librarian")
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    public ResponseEntity<?> updateLibrarian(@RequestBody @Valid UserAuthDTO updatedLibrarianInfo,
+                                             HttpServletRequest request) throws Exception {
+        return ResponseEntity.ok(userService.updateLibrarian(null, updatedLibrarianInfo, request));
+    }
+
+    @PutMapping("/librarian/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateLibrarian(@PathVariable Long id,
+                                             @RequestBody @Valid UserAuthDTO updatedLibrarianInfo,
+                                             HttpServletRequest request) throws Exception {
+        return ResponseEntity.ok(userService.updateLibrarian(id, updatedLibrarianInfo, request));
     }
 }
