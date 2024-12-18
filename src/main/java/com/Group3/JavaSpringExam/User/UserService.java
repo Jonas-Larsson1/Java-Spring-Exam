@@ -38,11 +38,23 @@ public class UserService {
         }
     }
 
-    public User addMember(User member) {
+    public UserDTO addMember(UserAuthDTO memberInfo) {
         // just to make sure no admin rights are granted
-        member.setRole(roleRepository.findByName("ROLE_MEMBER"));
-        member.setPassword(passwordEncoder.encode(member.getRawPassword()));
-        return userRepository.save(member);
+        User newUser = new User();
+
+        newUser.setFirstName(memberInfo.getFirstName());
+        newUser.setLastName(memberInfo.getLastName());
+        newUser.setEmail(memberInfo.getEmail());
+        newUser.setPassword(passwordEncoder.encode(memberInfo.getRawPassword()));
+        newUser.setRole(roleRepository.findByName("ROLE_MEMBER"));
+
+        userRepository.save(newUser);
+
+        UserDTO newUserInfo = new UserDTO();
+
+        modelMapper.map(newUser, newUserInfo);
+
+        return newUserInfo;
     }
 
     public User updateMember(User updatedMemberInfo, HttpServletRequest request) {
@@ -58,7 +70,7 @@ public class UserService {
 
     public String addLibrarian(@Valid User librarian) {
         librarian.setRole(roleRepository.findByName("ROLE_LIBRARIAN"));
-        librarian.setPassword(passwordEncoder.encode(librarian.getRawPassword()));
+//        librarian.setPassword(passwordEncoder.encode(librarian.getRawPassword()));
         return "New librarian with email " + userRepository.saveAndFlush(librarian).getEmail() + " added.";
     }
 

@@ -22,8 +22,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
     @PostMapping("/member")
-    public ResponseEntity<?> addMember(@RequestBody @Valid User member) {
-        return ResponseEntity.ok(userService.addMember(member));
+    public ResponseEntity<?> addMember(@RequestBody @Valid UserAuthDTO memberInfo) {
+        return ResponseEntity.ok(userService.addMember(memberInfo));
     }
 
     @PutMapping("/member")
